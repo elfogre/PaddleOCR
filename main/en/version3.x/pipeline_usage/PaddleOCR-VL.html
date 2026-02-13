@@ -7033,9 +7033,7 @@ Refer to section <a href="#44-pipeline-configuration-adjustment-instructions">4.
 <tr>
 <td><code>file</code></td>
 <td><code>string</code></td>
-<td>The URL of an image file or PDF file accessible to the server, or the Base64-encoded result of the content of the aforementioned file types. By default, for PDF files with more than 10 pages, only the first 10 pages will be processed.<br/>To remove the page limit, add the following configuration to the pipeline configuration file:<pre> <code>Serving:
-  extra:
-    max_num_input_imgs: null</code></pre>
+<td>The URL of an image file or PDF file accessible to the server, or the Base64-encoded result of the content of the aforementioned file types.
 </td>
 <td>Yes</td>
 </tr>
@@ -8005,13 +8003,13 @@ If you do not need to adjust pipeline configurations, you can ignore this sectio
 <li><code>url_expires_in</code>: URL validity period (in seconds). <code>-1</code> indicates it never expires.</li>
 </ul>
 <p>For more information on obtaining AK/SK and other details, refer to the <a href="https://cloud.baidu.com/doc/BOS/index.html">Baidu Intelligent Cloud Official Documentation</a>.</p>
-<p><strong>Modify PDF Parsing Page Limit</strong></p>
-<p>For performance considerations, the service processes only the first 10 pages of received PDF files by default. To adjust the page limit, add the following configuration to the pipeline configuration file (<code>Serving</code> is a top-level field):</p>
+<p><strong>Limit the Number of PDF Pages Parsed</strong></p>
+<p>By default, the service processes the entire PDF file. In production environments, if a PDF contains too many pages, it may affect system stability, leading to processing timeouts or excessive resource usage. To ensure stable service operation, it is recommended to set a reasonable page limit based on actual needs. You can add the following configuration to the production configuration file (<code>Serving</code> is the top-level field):</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="nt">Serving</span><span class="p">:</span>
 </span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">  </span><span class="nt">extra</span><span class="p">:</span>
-</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="nt">max_num_input_imgs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;new page limit, e.g., 100&gt;</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="w">    </span><span class="nt">max_num_input_imgs</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;page limit, e.g., 100&gt;</span>
 </span></code></pre></div>
-<p>Set <code>max_num_input_imgs</code> to <code>null</code> to remove the page limit.</p>
+<p>When <code>max_num_input_imgs</code> is set to <code>null</code>, there will be no limit on the number of PDF pages.</p>
 <h4 id="443-apply-the-configuration-file">4.4.3 Apply the Configuration File<a class="headerlink" href="#443-apply-the-configuration-file" title="Permanent link">&para;</a></h4>
 <p><strong>If you deployed using Docker Compose</strong>:</p>
 <p><strong>If you are deploying using Docker Compose:</strong></p>
