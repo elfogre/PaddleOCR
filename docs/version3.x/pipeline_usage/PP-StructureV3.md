@@ -1713,8 +1713,7 @@ markdown_texts = pipeline.concatenate_markdown_pages(markdown_list)
 mkd_file_path = output_path / f"{Path(input_file).stem}.md"
 mkd_file_path.parent.mkdir(parents=True, exist_ok=True)
 
-with open(mkd_file_path, "w", encoding="utf-8") as f:
-    markdown_texts.save_to_markdown(save_path=mkd_file_path)
+markdown_texts.save_to_markdown(save_path=mkd_file_path)
 
 for item in markdown_images:
     if item:
